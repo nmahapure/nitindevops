@@ -1,0 +1,19 @@
+pipeline {
+  agent any
+  
+  environment{ 
+    PATH = "/opt/maven3/bin:$path"
+  }
+  stages {
+      stage("git checkout") {
+          steps{
+            git credentialid: 'github', url: 'https://github.com/nmahapure/nitindevops'
+          }
+       }
+       stage("Maven Build") {
+          steps{
+          sh "mvn clean package"
+          }
+       }
+    }
+}
